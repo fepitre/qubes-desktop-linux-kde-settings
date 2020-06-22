@@ -1,0 +1,80 @@
+From 3caee9d520bf7a80a552dd2bfaadfaaa87e0a82c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?=
+ <frederic.pierret@qubes-os.org>
+Date: Mon, 22 Jun 2020 12:40:14 +0200
+Subject: [PATCH] disable nepomuk
+
+From previous work see https://github.com/QubesOS/qubes-desktop-kde-settings.
+---
+ .../default/share/applications/kde4/nepomukbackup.desktop    | 4 ++++
+ .../share/applications/kde4/nepomukcontroller.desktop        | 4 ++++
+ .../default/share/autostart/nepomukcontroller.desktop        | 2 ++
+ .../default/share/autostart/nepomukserver.desktop            | 2 ++
+ .../kde-profile/default/share/config/nepomukserverrc         | 5 +++++
+ .../default/share/kde4/services/kcm_nepomuk.desktop          | 2 ++
+ 6 files changed, 19 insertions(+)
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukbackup.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukcontroller.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/autostart/nepomukcontroller.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/autostart/nepomukserver.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/config/nepomukserverrc
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/kde4/services/kcm_nepomuk.desktop
+
+diff --git a/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukbackup.desktop b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukbackup.desktop
+new file mode 100644
+index 0000000..722a86d
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukbackup.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++NoDisplay=true
++Name=Removed entry
++Exec=/bin/true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukcontroller.desktop b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukcontroller.desktop
+new file mode 100644
+index 0000000..722a86d
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/nepomukcontroller.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++NoDisplay=true
++Name=Removed entry
++Exec=/bin/true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukcontroller.desktop b/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukcontroller.desktop
+new file mode 100644
+index 0000000..e1e3e17
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukcontroller.desktop
+@@ -0,0 +1,2 @@
++[Desktop Entry]
++Hidden=true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukserver.desktop b/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukserver.desktop
+new file mode 100644
+index 0000000..e1e3e17
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/autostart/nepomukserver.desktop
+@@ -0,0 +1,2 @@
++[Desktop Entry]
++Hidden=true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/config/nepomukserverrc b/usr/share/kde-settings/kde-profile/default/share/config/nepomukserverrc
+new file mode 100644
+index 0000000..c277270
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/config/nepomukserverrc
+@@ -0,0 +1,5 @@
++[Basic Settings]
++Start Nepomuk=false
++
++[Service-nepomukstrigiservice]
++autostart=false
+diff --git a/usr/share/kde-settings/kde-profile/default/share/kde4/services/kcm_nepomuk.desktop b/usr/share/kde-settings/kde-profile/default/share/kde4/services/kcm_nepomuk.desktop
+new file mode 100644
+index 0000000..e1e3e17
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/kde4/services/kcm_nepomuk.desktop
+@@ -0,0 +1,2 @@
++[Desktop Entry]
++Hidden=true
+-- 
+2.25.4
+

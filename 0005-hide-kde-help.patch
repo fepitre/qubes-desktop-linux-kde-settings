@@ -1,0 +1,25 @@
+From 977bd5efe3579bc24d370cc0db24ca516dc6851a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?=
+ <frederic.pierret@qubes-os.org>
+Date: Mon, 22 Jun 2020 12:42:12 +0200
+Subject: [PATCH] hide kde help
+
+From previous work see https://github.com/QubesOS/qubes-desktop-kde-settings.
+---
+ .../kde-profile/default/share/applications/kde4/Help.desktop  | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/applications/kde4/Help.desktop
+
+diff --git a/usr/share/kde-settings/kde-profile/default/share/applications/kde4/Help.desktop b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/Help.desktop
+new file mode 100644
+index 0000000..722a86d
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/applications/kde4/Help.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++NoDisplay=true
++Name=Removed entry
++Exec=/bin/true
+-- 
+2.25.4
+

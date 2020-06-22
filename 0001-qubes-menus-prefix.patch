@@ -1,0 +1,39 @@
+From d8b8f45b84a7b102b6047338abfd2589d0f2e5ba Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?=
+ <frederic.pierret@qubes-os.org>
+Date: Mon, 22 Jun 2020 12:33:21 +0200
+Subject: [PATCH] qubes-menus-prefix
+
+From previous work see https://github.com/QubesOS/qubes-desktop-kde-settings.
+---
+ etc/kde/env/env.sh                  | 2 +-
+ etc/xdg/plasma-workspace/env/env.sh | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/etc/kde/env/env.sh b/etc/kde/env/env.sh
+index b44d850..de0fcc4 100644
+--- a/etc/kde/env/env.sh
++++ b/etc/kde/env/env.sh
+@@ -8,6 +8,6 @@ fi
+ 
+ # XDG_MENU_PREFIX
+ if [ -z "${XDG_MENU_PREFIX}" ] ; then
+-   XDG_MENU_PREFIX="kde4-"
++   XDG_MENU_PREFIX="kde4-qubes-"
+    export XDG_MENU_PREFIX
+ fi
+diff --git a/etc/xdg/plasma-workspace/env/env.sh b/etc/xdg/plasma-workspace/env/env.sh
+index 1ac90fa..a7fc301 100644
+--- a/etc/xdg/plasma-workspace/env/env.sh
++++ b/etc/xdg/plasma-workspace/env/env.sh
+@@ -14,6 +14,6 @@ fi
+ 
+ # XDG_MENU_PREFIX
+ if [ -z "${XDG_MENU_PREFIX}" ] ; then
+-   XDG_MENU_PREFIX="kf5-"
++   XDG_MENU_PREFIX="kf5-qubes-"
+    export XDG_MENU_PREFIX
+ fi
+-- 
+2.25.4
+

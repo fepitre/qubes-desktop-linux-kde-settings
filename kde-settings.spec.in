@@ -1,14 +1,13 @@
-%global rel @REL@
 
 Summary: Config files for kde
 Name:    kde-settings
-Epoch:   2000
 Version: @VERSION@
-Release: %{rel}%{?dist}.2
+Release: @REL@%{?dist}
+Epoch:   2000
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
-Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
+Source0: https://github.com/FedoraKDE/kde-settings/archive/%{version}/%{name}-%{version}.tar.gz
 Source1: COPYING
 Source2: kickoff.tar.gz
 Source100: 10-qubes.js
@@ -17,6 +16,12 @@ BuildArch: noarch
 
 BuildRequires: kde-filesystem
 BuildRequires: systemd
+
+%if ! 0%{?bootstrap}
+# for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
+%global  version_maj %(echo %{version} | cut -d. -f1)
+BuildRequires: f%{version_maj}-backgrounds-kde
+%endif
 
 # when kdebugrc was moved here
 Conflicts: kf5-kdelibs4support < 5.7.0-3
@@ -38,19 +43,14 @@ Requires: qubes-artwork
 
 Requires(post): coreutils sed
 
-###############################################################
 # Qubes Patches:
-Patch101: qubes-menus-prefix.patch
-Patch102: kdm-settings.patch
-Patch103: disable-nepomuk.patch
-Patch104: hide-knetattach.patch
-Patch105: disable-klipper.patch
-Patch106: hide-kde-help.patch
-Patch107: kdm-disable-switch-user.patch
-Patch108: hide-thunar.patch
-Patch109: kickoff-hide-computer-tab.patch
-Patch110: start-here-icon.patch
-###############################################################
+Patch0: 0001-qubes-menus-prefix.patch
+Patch1: 0002-disable-nepomuk.patch
+Patch2: 0003-hide-knetattach.patch
+Patch3: 0004-disable-klipper.patch
+Patch4: 0005-hide-kde-help.patch
+Patch5: 0006-hide-thunar.patch
+Patch6: 0007-start-here-icon.patch
 
 %description
 %{summary}.
@@ -64,11 +64,13 @@ Requires: xorg-x11-xinit
 %{summary}.
 
 %package plasma
-Summary: Configuration files for plasma 
+Summary: Configuration files for plasma
 Requires: %{name} = %{epoch}:%{version}-%{release}
-Requires: f25-backgrounds-kde
+%if 0%{?version_maj:1}
+Requires: f%{version_maj}-backgrounds-kde
+%endif
 Requires: system-logos
-%description plasma 
+%description plasma
 %{summary}.
 
 # FIXME/TODO: can probably consider dropping this subpkg now that we
@@ -87,7 +89,7 @@ Requires: alsa-plugins-pulseaudio
 %{summary}.
 
 %package -n qt-settings
-Summary: Configuration files for Qt 
+Summary: Configuration files for Qt
 # qt-graphicssystem.* scripts use lspci
 #Requires: pciutils
 %description -n qt-settings
@@ -95,7 +97,7 @@ Summary: Configuration files for Qt
 
 
 %prep
-%autosetup -N -n %{name}-%{version}-%{rel}
+%autosetup -N -n %{name}-%{version}
 
 # omit crud
 rm -fv Makefile
@@ -106,10 +108,6 @@ mv kickoff/package .%{_datadir}/kde-settings/kde-profile/default/share/plasma/pl
 rm -rf kickoff
 
 %autopatch -p1
-
-%build
-# Intentionally left blank.  Nothing to see here.
-
 
 %install
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
@@ -131,7 +129,7 @@ rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 # FIXME/NEEDSWORK, still (mostly?) kde4
 # rhel stuff
-%if 0%{?rhel}
+%if 0%{?rhel} && 0%{?rhel} <= 7
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
        %{buildroot}%{_prefix}/lib/rpm \
        %{buildroot}%{_datadir}/polkit-1/
@@ -153,14 +151,20 @@ rm -f %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/kspl
 install -m 644 %{SOURCE100} %{buildroot}%{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/
 install -m 644 %{SOURCE101} %{buildroot}%{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/
 
-%files 
+%check
+%if 0%{?version_maj:1}
+test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
+%endif
+
+
+%files
 %license COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent-startup.sh
 %{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
 # these can probably go now -- rex
@@ -171,15 +175,15 @@ install -m 644 %{SOURCE101} %{buildroot}%{_datadir}/plasma/shells/org.kde.plasma
 %endif
 %config(noreplace) %{_sysconfdir}/xdg/kcm-about-distrorc
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
-%config(noreplace) /etc/pam.d/kcheckpass
-%config(noreplace) /etc/pam.d/kscreensaver
+%config(noreplace) %{_sysconfdir}/pam.d/kcheckpass
+%config(noreplace) %{_sysconfdir}/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %dir %{_datadir}/kde-settings/
 %dir %{_datadir}/kde-settings/kde-profile/
 %{_datadir}/applications/kde-mimeapps.list
-%if 0%{?rhel}
+%if 0%{?rhel} && 0%{?rhel} <= 7
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
@@ -193,6 +197,8 @@ install -m 644 %{SOURCE101} %{buildroot}%{_datadir}/plasma/shells/org.kde.plasma
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
+%if 0%{?version_maj:1}
+%endif
 
 %files pulseaudio
 # nothing, this is a metapackage

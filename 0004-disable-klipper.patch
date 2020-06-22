@@ -1,0 +1,47 @@
+From 1a6eee26bf77c089f4becd90c200f2adc85c834f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?=
+ <frederic.pierret@qubes-os.org>
+Date: Mon, 22 Jun 2020 12:41:55 +0200
+Subject: [PATCH] disable klipper
+
+From previous work see https://github.com/QubesOS/qubes-desktop-kde-settings.
+---
+ .../default/share/applications/org.kde.klipper.desktop        | 4 ++++
+ .../default/share/autostart/org.kde.klipper.desktop           | 4 ++++
+ .../kde-settings/kde-profile/default/share/config/klipperrc   | 2 ++
+ 3 files changed, 10 insertions(+)
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/applications/org.kde.klipper.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/autostart/org.kde.klipper.desktop
+ create mode 100644 usr/share/kde-settings/kde-profile/default/share/config/klipperrc
+
+diff --git a/usr/share/kde-settings/kde-profile/default/share/applications/org.kde.klipper.desktop b/usr/share/kde-settings/kde-profile/default/share/applications/org.kde.klipper.desktop
+new file mode 100644
+index 0000000..722a86d
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/applications/org.kde.klipper.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++NoDisplay=true
++Name=Removed entry
++Exec=/bin/true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/autostart/org.kde.klipper.desktop b/usr/share/kde-settings/kde-profile/default/share/autostart/org.kde.klipper.desktop
+new file mode 100644
+index 0000000..722a86d
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/autostart/org.kde.klipper.desktop
+@@ -0,0 +1,4 @@
++[Desktop Entry]
++NoDisplay=true
++Name=Removed entry
++Exec=/bin/true
+diff --git a/usr/share/kde-settings/kde-profile/default/share/config/klipperrc b/usr/share/kde-settings/kde-profile/default/share/config/klipperrc
+new file mode 100644
+index 0000000..19a8826
+--- /dev/null
++++ b/usr/share/kde-settings/kde-profile/default/share/config/klipperrc
+@@ -0,0 +1,2 @@
++[General]
++AutoStart=false
+-- 
+2.25.4
+

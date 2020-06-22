@@ -1,3 +1,18 @@
+From 9cd6b24fee5cfc813ed891a0b1e7025c123dc4b8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret=20=28fepitre=29?=
+ <frederic.pierret@qubes-os.org>
+Date: Mon, 22 Jun 2020 12:44:47 +0200
+Subject: [PATCH] start here icon
+
+From previous work see https://github.com/QubesOS/qubes-desktop-kde-settings.
+---
+ .../contents/plasmoidsetupscripts/org.kde.plasma.kicker.js   | 5 +++--
+ .../plasmoidsetupscripts/org.kde.plasma.kickerdash.js        | 5 +++--
+ .../contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js  | 5 +++--
+ 3 files changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
+index 311b587..39f0194 100644
 --- a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 +++ b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 @@ -22,7 +22,8 @@
@@ -11,6 +26,8 @@
 -  applet.writeConfig("icon", "start-here");
 +  applet.writeConfig("icon", "qubes-logo-icon");
  }
+diff --git a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
+index 311b587..39f0194 100644
 --- a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 +++ b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 @@ -22,7 +22,8 @@
@@ -24,6 +41,8 @@
 -  applet.writeConfig("icon", "start-here");
 +  applet.writeConfig("icon", "qubes-logo-icon");
  }
+diff --git a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
+index 311b587..39f0194 100644
 --- a/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
 +++ b/usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
 @@ -22,7 +22,8 @@
@@ -37,3 +56,6 @@
 -  applet.writeConfig("icon", "start-here");
 +  applet.writeConfig("icon", "qubes-logo-icon");
  }
+-- 
+2.25.4
+

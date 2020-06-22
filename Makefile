@@ -1,7 +1,7 @@
 VERSION := $(shell cat version)
 REL := $(shell cat rel)
 
-SRC_FILE := v$(VERSION)-$(REL).tar.gz
+SRC_FILE := kde-settings-$(VERSION).tar.gz
 
 DISTFILES_MIRROR ?= https://ftp.qubes-os.org/distfiles/
 UNTRUSTED_SUFF := .UNTRUSTED
